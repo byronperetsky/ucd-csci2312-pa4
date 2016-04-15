@@ -10,12 +10,12 @@
 
 using namespace Gaming;
 
-Game::NUM_INIT_AGENT_FACTOR = 4;
-Game::NUM_INIT_RESOURCE_FACTOR = 2;
-Game::MIN_WIDTH = 3;
-Game::MIN_HEIGHT = 3;
-Game::STARTING_AGENT_ENERGY = 20;
-Game::STARTING_RESOURCE_CAPACITY = 10;
+const unsigned int Game::NUM_INIT_AGENT_FACTOR = 4;
+const unsigned int Game::NUM_INIT_RESOURCE_FACTOR = 2;
+const unsigned Game::MIN_WIDTH = 3;
+const unsigned Game::MIN_HEIGHT = 3;
+const double Game::STARTING_AGENT_ENERGY = 20;
+const double Game::STARTING_RESOURCE_CAPACITY = 10;
 
 
 PositionRandomizer Game::__posRandomizer = PositionRandomizer();
@@ -27,17 +27,11 @@ void Game::populate(){
     std::uniform_int_distribution<int> d(0, __width * __height);
 
     __numInitAgents = (__width * __height) / NUM_INIT_AGENT_FACTOR;
-
     __numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
-
     unsigned int numStrategic = __numInitAgents / 2;
-
     unsigned int numSimple = __numInitAgents - numStrategic;
-
     unsigned int numAdvantages = __numInitResources / 4;
-
     unsigned int numFoods = __numInitResources - numAdvantages;
-
 
 
     // populate Strategic agents
@@ -79,14 +73,34 @@ void Game::populate(){
 
 
 }
+
+//constructors & destructor
 Game::Game(){
 
-    //TODO
+    __width = MIN_WIDTH;
+    __height = MIN_HEIGHT;
+    __round = 0;
+
+    populate();
+
+    __status = NOT_STARTED;
 }
 // note: manual population by default
-Game::Game(unsigned width, unsigned height, bool manual = true){
+Game::Game(unsigned width, unsigned height, bool manual){
 
-    //TODO
+//    if (width < MIN_WIDTH || height < MIN_HEIGHT) {
+//        throw InsufficientDimensionsEx(MIN_WIDTH, MIN_HEIGHT, width, height);
+//    }
+
+    __width = width;
+    __height = height;
+    __round = 0;
+
+    if(!manual){
+
+        populate();
+    }
+    __status = NOT_STARTED;
 }
 Game::Game(const Game &another){
 
@@ -132,10 +146,10 @@ void Game::addSimple(unsigned x, unsigned y){//TODO
 void Game::addSimple(unsigned x, unsigned y, double energy){//TODO
 
 }
-void Game::addStrategic(const Position &position, Strategy *s = new DefaultAgentStrategy()){//TODO
+void Game::addStrategic(const Position &position, Strategy *s){//TODO
 
 }
-void Game::addStrategic(unsigned x, unsigned y, Strategy *s = new DefaultAgentStrategy()){//TODO
+void Game::addStrategic(unsigned x, unsigned y, Strategy *s){//TODO
 
 }
 void Game::addFood(const Position &position){//TODO
@@ -169,7 +183,7 @@ const Position Game::move(const Position &pos, const ActionType &ac) const{//TOD
 void Game::round(){//TODO
 
 }   // play a single round
-void Game::play(bool verbose = false){//TODO
+void Game::play(bool verbose){//TODO
 
 }    // play game until over
 

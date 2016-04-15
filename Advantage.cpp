@@ -9,27 +9,27 @@
 
 using namespace Gaming;
 
-Advantage::Advantage(const Game &g, const Position &p, double capacity){
-    //TODO
-
-
-}
+//Advantage::Advantage(const Game &g, const Position &p, double capacity){
+//    //TODO
+//
+//
+//}
 Advantage::~Advantage(){
     //TODO
 
 }
 
 
-void print(std::ostream &os) const override{
-    //TODO
-
-}
-
-double getCapacity() const override{
-//TODO
-
-}
-double consume() override{
-    //TODO
-
-}
+//void print(std::ostream &os) const override{
+//    //TODO
+//
+//}
+//
+//double getCapacity() const override{
+////TODO
+//
+//}
+//double consume() override{
+//    //TODO
+//
+//}

@@ -8,9 +8,9 @@
 
 using namespace Gaming;
 
-Piece::Piece(const Game &g, const Position &p){
-    //TODO
-}
+//Piece::Piece(const Game &g, const Position &p){
+//    //TODO
+//}
 Piece::~Piece(){
     //TODO
 }

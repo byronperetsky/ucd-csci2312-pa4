@@ -9,15 +9,15 @@
 
 using namespace Gaming;
 
-Strategy::AggressiveAgentStrategy(double agentEnergy){
-    //TODO
-
-}
-~AggressiveAgentStrategy(){
-    //TODO
-
-}
-ActionType operator()(const Surroundings &s) const override{
-    //TODO
-
-}
+//Strategy::AggressiveAgentStrategy(double agentEnergy){
+//    //TODO
+//
+//}
+//~AggressiveAgentStrategy(){
+//    //TODO
+//
+//}
+//ActionType operator()(const Surroundings &s) const override{
+//    //TODO
+//
+//}

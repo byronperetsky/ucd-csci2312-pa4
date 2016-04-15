@@ -9,26 +9,26 @@
 
 using namespace Gaming;
 
-Agent::Agent(const Game &g, const Position &p, double energy){
-    //TODO
-
-}
+//Agent::Agent(const Game &g, const Position &p, double energy){
+//    //TODO
+//
+//}
 Agent::~Agent(){
 
     //TODO
 }
 
-void age() override final{
-
-    //TODO
-}
-
-Piece &operator*(Piece &other) override final{
-    //TODO
-}
-Piece &interact(Agent *) override final{
-    //TODO
-}
-Piece &interact(Resource *) override final{
-    //TODO
-}
+//void age() override final{
+//
+//    //TODO
+//}
+//
+//Piece &operator*(Piece &other) override final{
+//    //TODO
+//}
+//Piece &interact(Agent *) override final{
+//    //TODO
+//}
+//Piece &interact(Resource *) override final{
+//    //TODO
+//}
