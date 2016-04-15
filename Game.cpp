@@ -2,13 +2,82 @@
 
 #include "Game.h"
 #include "Gaming.h"
+#include "Simple.h"
+#include "Strategic.h"
+#include "Food.h"
+#include "Advantage.h"
 
 
 using namespace Gaming;
 
+Game::NUM_INIT_AGENT_FACTOR = 4;
+Game::NUM_INIT_RESOURCE_FACTOR = 2;
+Game::MIN_WIDTH = 3;
+Game::MIN_HEIGHT = 3;
+Game::STARTING_AGENT_ENERGY = 20;
+Game::STARTING_RESOURCE_CAPACITY = 10;
+
+
+PositionRandomizer Game::__posRandomizer = PositionRandomizer();
+
+
 void Game::populate(){
 
-    //TODO
+    std::default_random_engine gen;
+    std::uniform_int_distribution<int> d(0, __width * __height);
+
+    __numInitAgents = (__width * __height) / NUM_INIT_AGENT_FACTOR;
+
+    __numInitResources = (__width * __height) / NUM_INIT_RESOURCE_FACTOR;
+
+    unsigned int numStrategic = __numInitAgents / 2;
+
+    unsigned int numSimple = __numInitAgents - numStrategic;
+
+    unsigned int numAdvantages = __numInitResources / 4;
+
+    unsigned int numFoods = __numInitResources - numAdvantages;
+
+
+
+    // populate Strategic agents
+    while (numStrategic > 0) {
+        int i = d(gen); // random index in the grid vector
+        if (__grid[i] == nullptr) { // is position empty
+            Position pos(i / __width, i % __width);
+            __grid[i] = new Strategic(*this, pos, Game::STARTING_AGENT_ENERGY);
+            numStrategic --;
+        }
+    }
+
+    while (numSimple > 0) {
+        int i = d(gen);
+        if (i != (__width * __height) && __grid[i] == nullptr) {
+            Position pos(i / __width, i % __width);
+            __grid[i] = new Simple(*this, pos, STARTING_AGENT_ENERGY);
+            numSimple--;
+        }
+    }
+
+    while (numSimple > 0) {
+        int i = d(gen);
+        if (i != (__width * __height) && __grid[i] == nullptr) {
+            Position pos(i / __width, i % __width);
+            __grid[i] = new Advantage(*this, pos, STARTING_AGENT_ENERGY);
+            numSimple--;
+        }
+    }
+
+    while (numSimple > 0) {
+        int i = d(gen);
+        if (i != (__width * __height) && __grid[i] == nullptr) {
+            Position pos(i / __width, i % __width);
+            __grid[i] = new Food(*this, pos, STARTING_AGENT_ENERGY);
+            numSimple--;
+        }
+    }
+
+
 }
 Game::Game(){
 
@@ -23,6 +92,10 @@ Game::Game(const Game &another){
 
     //TODO
 
+}
+
+Game::~Game(){
+    //TODO
 }
 
 // getters
