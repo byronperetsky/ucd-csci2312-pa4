@@ -1,12 +1,10 @@
 #include <sstream>
+#include <random>
+#include <chrono>
 #include "Simple.h"
 
 
-//TODO
-//TODO//TODO
-//TODO//TODO//TODO
-//TODO//TODO//TODO//TODO
-//TODO//TODO//TODO//TODO//TODO//TODO
+
 
 
 using namespace Gaming;
@@ -22,6 +20,7 @@ Simple::~Simple() {
 }
 
 void Simple::print(std::ostream &os) const {
+
     std::stringstream ss;
     ss << SIMPLE_ID << __id;
     std::string s;
@@ -32,16 +31,20 @@ void Simple::print(std::ostream &os) const {
 ActionType Simple::takeTurn(const Surroundings &s) const {
 
     std::vector <ActionType> action = {NW,N,NE,W,STAY,E,SW,S,SE};
+
     std::vector <int> pieceIndex;
     int numDir=0;
 
     std::random_device rd;
+
     std::mt19937 gen(rd());
 
 
 
-    for (int i=0; i< s.array.size(); ++i) {
-        if(s.array[i]==FOOD|| s.array[i]==ADVANTAGE) {
+    for (int i=0; i< s.array.size(); ++i)
+    {
+        if(s.array[i]==FOOD|| s.array[i]==ADVANTAGE)
+        {
             pieceIndex.push_back(i);
             numDir++;
         }
