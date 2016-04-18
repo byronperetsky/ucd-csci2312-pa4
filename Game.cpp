@@ -1,5 +1,5 @@
 #include <iomanip>
-
+#include <set>
 #include "Game.h"
 #include "Simple.h"
 #include "Strategic.h"
@@ -441,7 +441,64 @@ const Position Game::move(const Position &pos, const ActionType &ac) const {
 
 void Game::round() {
 
-//TODO
+    std::set<Piece*> pieces;
+
+    for (auto it = __grid.begin(); it != __grid.end(); ++it) {
+
+        if (*it) { pieces.insert(pieces.end(), *it); (*it)->setTurned(false); }
+
+    }
+
+    for (auto item = pieces.begin(); item != pieces.end(); ++item) {
+
+        if (!(*item)->getTurned())
+        {
+
+            (*item)->setTurned(true);
+
+            (*item)->age();
+
+            ActionType ac = (*item)->takeTurn(getSurroundings((*item)->getPosition()));
+
+            Position posA = (*item)->getPosition();
+
+            Position posB = move(posA, ac);
+
+            if (posA.x != posB.x || posA.y != posB.y) { Piece *mPiece = __grid[posB.y + (posB.x * __width)];
+
+                if (mPiece) {
+
+                    //(*(*item)) * (*p);
+
+                    if ((*item)->getPosition().x != posA.x || (*item)->getPosition().y != posA.y) {
+                        __grid[posB.y + (posB.x * __width)] = (*item); __grid[posA.y + (posA.x * __width)] = mPiece; }
+                }
+                else {
+
+                    (*item)->setPosition(posB);
+
+                    __grid[posB.y + (posB.x * __width)] = (*item);
+
+                    __grid[posA.y + (posA.x * __width)] = nullptr;
+
+                }
+            }
+        }
+    }
+
+    for (unsigned int i = 0; i < __grid.size(); ++i) {
+
+        if (__grid[i] && !(__grid[i]->isViable()))
+        {
+            { delete __grid[i]; __grid[i] = nullptr; }
+        }
+
+    }
+
+    if (getNumResources() <= 0) { __status = Status::OVER; }
+
+    ++__round;
+
 
 }
 
