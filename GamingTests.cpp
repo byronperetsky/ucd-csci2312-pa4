@@ -30,7 +30,7 @@ using namespace Testing;
 // - - - - - - - - - - T E S T S - - - - - - - - - -
 
 // - - - - - - - - - - P I E C E - - - - - - - - - -
-
+//
 // Smoketest: constructor, copy constructor, destructor, resources
 void test_piece_smoketest(ErrorContext &ec) {
     bool pass;
@@ -920,7 +920,7 @@ void test_game_smoketest(ErrorContext &ec) {
             Game g(Game::MIN_WIDTH-1, 5);
             pass = false;
         } catch (InsufficientDimensionsEx &ex) {
-            std::cerr << "Exception generated: " << ex << std::endl;
+//            std::cerr << "Exception generated: " << ex << std::endl;
             pass = (ex.getName() == "InsufficientDimensionsEx");
         }
     }
@@ -1389,7 +1389,7 @@ void test_game_randomization(ErrorContext &ec, unsigned int numRuns) {
                 Position pos = Game::randomPosition(positions);
                 pass = false;
             } catch (PosVectorEmptyEx &ex) {
-                std::cerr << "Exception generated: " << ex << std::endl;
+//                std::cerr << "Exception generated: " << ex << std::endl;
                 pass = (ex.getName() == "PosVectorEmptyEx");
             }
 
